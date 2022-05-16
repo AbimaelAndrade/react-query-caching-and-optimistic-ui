@@ -4,6 +4,7 @@ import factories from "./factories";
 import routes from "./routes";
 import models from "./models";
 import seeds from "./seeds";
+import fixtures from "./fixtures";
 
 const config = (environment) => {
   const config = {
@@ -13,6 +14,7 @@ const config = (environment) => {
     factories,
     models,
     routes,
+    fixtures,
     seeds,
     serializers: {
       product: RestSerializer.extend({

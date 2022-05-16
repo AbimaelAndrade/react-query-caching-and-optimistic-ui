@@ -3,5 +3,6 @@ const productsSeeder = (server) => {
 };
 
 export default function seeds(server) {
+  server.loadFixtures();
   productsSeeder(server);
 }
