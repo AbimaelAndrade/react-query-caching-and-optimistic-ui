@@ -29,15 +29,13 @@ export default function routes() {
     }
 
     return {
-      data: {
-        content: this.serialize(data)?.products,
-        total,
-        perPage: +take,
-        currentPage,
-        lastPage,
-        hasNextPage,
-        hasPreviousPage,
-      },
+      content: this.serialize(data)?.products,
+      total,
+      perPage: +take,
+      currentPage,
+      lastPage,
+      hasNextPage,
+      hasPreviousPage,
     };
   });
 
