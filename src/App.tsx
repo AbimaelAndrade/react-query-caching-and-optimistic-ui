@@ -1,12 +1,34 @@
 import { useEffect, useState } from "react";
 import api from "./api";
 
+type Product = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  price: number;
+  category: {
+    id: number;
+    name: string;
+  };
+};
+
+type Response = {
+  content: Product[];
+  total: number;
+  perPage: number;
+  currentPage: number;
+  lastPage: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+};
+
 function App() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetcher = async () => {
-      const { data } = await api.get("/api/products?page=1&take=5");
+      const { data } = await api.get<Response>("/api/products?page=1&take=5");
       setProducts(data.content);
     };
 
