@@ -4,7 +4,7 @@ import getImage from "../fixtures/imagens";
 
 export default {
   product: Factory.extend({
-    title() {
+    name() {
       return faker.commerce.productName();
     },
     description() {
