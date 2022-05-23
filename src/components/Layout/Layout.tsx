@@ -1,5 +1,5 @@
-import { LogoReactQuery } from "../images/LogoReactQuery";
-import { Either, Navbar } from ".";
+import { LogoReactQuery } from "../../images/LogoReactQuery";
+import { Either, Navbar } from "..";
 
 export const Layout = ({ children }: ComponentProps) => {
   return (

@@ -1,9 +1,9 @@
 import { HTMLAttributes } from "react";
-import { Icon, Loading } from "../images";
-import { Controls } from "./Controls";
-import { Either } from "./Either";
-import { Tag } from "./Tag";
-import { Typography } from "./Typography";
+import { Icon, Loading } from "../../images";
+import { Controls } from "../Controls/Controls";
+import { Either } from "../Either/Either";
+import { Tag } from "../Tag/Tag";
+import { Typography } from "../Typography/Typography";
 
 type TableProps = {
   data: Product[];
@@ -94,9 +94,9 @@ export const Table = ({ data, pagination }: TableProps) => {
                   </Column>
                   <Column className="text-left">
                     <Controls.Group>
-                      <Controls.View onClick={() => {}} />
-                      <Controls.Edit onClick={() => {}} />
-                      <Controls.Remove onClick={() => {}} />
+                      <Controls.View onClick={() => { }} />
+                      <Controls.Edit onClick={() => { }} />
+                      <Controls.Remove onClick={() => { }} />
                     </Controls.Group>
                   </Column>
                 </tr>

@@ -1,6 +1,6 @@
-import { Layout } from ".";
+import { Layout } from "../../components";
 
-export const Page = ({ children }: ComponentProps) => {
+export const Template = ({ children }: ComponentProps) => {
   return (
     <Layout>
       <Layout.main>

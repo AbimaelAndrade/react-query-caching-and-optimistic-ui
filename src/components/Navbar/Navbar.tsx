@@ -1,5 +1,5 @@
-import { LogoReactQuery } from "../images/LogoReactQuery";
-import { Menu } from ".";
+import { LogoReactQuery } from "../../images/LogoReactQuery";
+import { Menu } from "..";
 
 export const Navbar = () => {
   return (

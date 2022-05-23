@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import { Icon } from "../images";
+import { Icon } from "../../images";
 
 const View = ({ onClick }: HTMLAttributes<HTMLButtonElement>) => (
   <button

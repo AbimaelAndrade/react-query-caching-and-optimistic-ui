@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
-import { Icon } from "../images";
-import { Typography } from "./Typography";
+import { Icon } from "../../images";
+import { Typography } from "../Typography/Typography";
 
 export const Tag = ({ children }: HTMLAttributes<HTMLDivElement>) => (
   <div className="flex w-fit px-3 py-1 inset-0 bg-green-200 hover:bg-green-300 text-green-900 rounded-full">
