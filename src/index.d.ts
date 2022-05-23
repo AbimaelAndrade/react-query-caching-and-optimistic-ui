@@ -12,14 +12,17 @@ interface Product {
   category: Category;
 }
 
-interface Response<T> {
-  content: T;
+interface Pagination {
   total: number;
   perPage: number;
   currentPage: number;
   lastPage: number;
   hasNextPage: boolean;
   hasPreviousPage: boolean;
+}
+
+interface Response<T> extends Pagination {
+  content: T;
 }
 
 interface ComponentProps {
