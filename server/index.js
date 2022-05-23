@@ -8,7 +8,7 @@ import fixtures from "./fixtures";
 
 const config = (environment) => {
   const config = {
-    timing: 2000,
+    timing: 3000,
     namespace: "api",
     environment,
     factories,
