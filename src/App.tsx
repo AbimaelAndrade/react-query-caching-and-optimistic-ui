@@ -1,8 +1,11 @@
-import ProductsAdmin from "./pages/ProductsAdmin/ProductsAdmin";
+import { BrowserRouter } from "react-router-dom";
+import Content from "./components/Content/Content";
 
 function App() {
   return (
-    <ProductsAdmin />
+    <BrowserRouter>
+      <Content />
+    </BrowserRouter>
   );
 }
 

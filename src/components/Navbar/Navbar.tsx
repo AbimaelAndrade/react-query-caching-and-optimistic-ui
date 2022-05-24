@@ -26,7 +26,7 @@ export const Navbar = () => {
         </div>
         <h1 className="btn btn-ghost normal-case text-xl">
           <span className="hidden md:inline-flex">
-            Caching e UI otimista com{" "}
+            Caching e UI otimista com
           </span>
           React Query
         </h1>

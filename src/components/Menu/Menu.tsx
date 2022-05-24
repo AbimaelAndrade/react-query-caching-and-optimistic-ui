@@ -1,13 +1,21 @@
+import { Link } from 'react-router-dom';
+
 export const Menu = ({ className }: Partial<Element>) => (
   <ul className={`menu ${className ?? ""}`}>
     <li>
-      <a>Tradicional</a>
+      <Link to="fetch">
+        Tradicional
+      </Link>
     </li>
     <li>
-      <a>Com React Query</a>
+      <Link to="react-query">
+        Com React Query
+      </Link>
     </li>
     <li>
-      <a>Loja</a>
+      <Link to="/">
+        Loja
+      </Link>
     </li>
   </ul>
 );
