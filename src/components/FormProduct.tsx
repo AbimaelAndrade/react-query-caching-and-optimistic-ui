@@ -72,7 +72,6 @@ export const FormProduct = ({ onSubmit }: FormProps) => {
                 placeholder="Categoria do produto"
               />
             </div>
-            s
           </div>
           <div className="flex items-center justify-end">
             <button className="bg-teal-600 hover:bg-teal-800 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
