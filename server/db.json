@@ -1,0 +1,46 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Hambúrguer",
+      "description": "Pão, bife de hambúrguer 90g, salada e batata.",
+      "price": 8.5,
+      "category": "Hambúrgueres"
+    },
+    {
+      "id": 2,
+      "name": "X-Búrguer",
+      "description": "Pão, bife de hambúrguer 90g, 1 fatia de queijo, salada e batata.",
+      "price": 10.5,
+      "category": "Hambúrgueres"
+    },
+    {
+      "id": 3,
+      "name": "X-Bacon",
+      "description": "Pão, bife de hambúrguer 90g, 1 fatia de queijo, 2 fatia de bacon, salada e batata.",
+      "price": 12.5,
+      "category": "Hambúrgueres"
+    },
+    {
+      "id": 4,
+      "name": "X-Tudo",
+      "description": "Pão, 2 bifes de hambúrguer 90g, 2 fatias de queijo, 4 fatias de bacon, salada e batata.",
+      "price": 14.5,
+      "category": "Hambúrgueres"
+    },
+    {
+      "id": 5,
+      "name": "Coca cola 350ml",
+      "description": "",
+      "price": 5.5,
+      "category": "Refrigerantes"
+    },
+    {
+      "id": 6,
+      "name": "Coca cola 600ml",
+      "description": "",
+      "price": 7.5,
+      "category": "Refrigerantes"
+    }
+  ]
+}

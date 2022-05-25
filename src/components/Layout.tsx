@@ -10,11 +10,11 @@ export const Layout = ({ children }: ComponentProps) => {
   );
 };
 
-Layout.main = ({ children }: ComponentProps) => (
+Layout.Main = ({ children }: ComponentProps) => (
   <main className="bg-gray-50 grow">{children}</main>
 );
 
-Layout.footer = ({ children }: ComponentProps) => (
+Layout.Footer = ({ children }: ComponentProps) => (
   <footer className="footer p-4 bg-neutral text-neutral-content">
     <Either
       renderIf={!!children}
@@ -25,6 +25,7 @@ Layout.footer = ({ children }: ComponentProps) => (
               href="https://react-query.tanstack.com/"
               target="_blank"
               className="cursor-pointer"
+              rel="noreferrer"
             >
               <LogoReactQuery className="w-8 h-8" />
             </a>
