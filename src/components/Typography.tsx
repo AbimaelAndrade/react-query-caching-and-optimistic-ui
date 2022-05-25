@@ -1,4 +1,3 @@
-import { type } from "os";
 import React, { HTMLAttributes } from "react";
 
 const Paragraph = ({

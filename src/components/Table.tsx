@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import { Icon, Loading } from "../images";
+import { Loading } from "../images";
 import { Controls } from "./Controls";
 import { Either } from "./Either";
 import { Tag } from "./Tag";
@@ -7,7 +7,65 @@ import { Typography } from "./Typography";
 
 type TableProps = {
   data: Product[];
-  pagination: Pagination;
+  isLoading: boolean;
+};
+
+export const Table = ({ data, isLoading }: TableProps) => {
+  return (
+    <Either renderIf={!isLoading} orRender={<LoadingProducts />}>
+      <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+        <div className="inline-block min-w-full shadow-lg rounded-md overflow-hidden">
+          <table className="min-w-full leading-normal">
+            <thead>
+              <tr>
+                <ColumnHeader>#</ColumnHeader>
+                <ColumnHeader>Produto</ColumnHeader>
+                <ColumnHeader>Preço</ColumnHeader>
+                <ColumnHeader>Categoria</ColumnHeader>
+                <ColumnHeader>Ações</ColumnHeader>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.map((product) => (
+                <tr key={product?.id || new Date().getTime()}>
+                  <Column>
+                    <Either renderIf={!!product?.id} orRender={<Loading />}>
+                      {product?.id}
+                    </Either>
+                  </Column>
+                  <Column>
+                    <div className="flex items-center h-fit">
+                      <div>
+                        <p className="text-gray-900 whitespace-no-wrap">
+                          {product?.name}
+                        </p>
+                        <p className="text-gray-400 text-xs">
+                          {product.description}
+                        </p>
+                      </div>
+                    </div>
+                  </Column>
+                  <Column>
+                    <Typography.Paragraph>{product.price}</Typography.Paragraph>
+                  </Column>
+                  <Column>
+                    <Tag>{product.category}</Tag>
+                  </Column>
+                  <Column className="text-left">
+                    <Controls.Group>
+                      <Controls.View onClick={() => {}} />
+                      <Controls.Edit onClick={() => {}} />
+                      <Controls.Remove onClick={() => {}} />
+                    </Controls.Group>
+                  </Column>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </Either>
+  );
 };
 
 const Column = ({
@@ -44,90 +102,3 @@ const LoadingProducts = () => (
     </Typography.Heading>
   </div>
 );
-
-export const Table = ({ data, pagination }: TableProps) => {
-  return (
-    <Either renderIf={!!data.length} orRender={<LoadingProducts />}>
-      <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-        <div className="inline-block min-w-full shadow-lg rounded-md overflow-hidden">
-          <table className="min-w-full leading-normal">
-            <thead>
-              <tr>
-                <ColumnHeader>#</ColumnHeader>
-                <ColumnHeader>Produto</ColumnHeader>
-                <ColumnHeader>Preço</ColumnHeader>
-                <ColumnHeader>Categoria</ColumnHeader>
-                <ColumnHeader>Ações</ColumnHeader>
-              </tr>
-            </thead>
-            <tbody>
-              {data?.map((product) => (
-                <tr key={product?.id || new Date().getTime()}>
-                  <Column>
-                    <Either renderIf={!!product?.id} orRender={<Loading />}>
-                      {product?.id}
-                    </Either>
-                  </Column>
-                  <Column>
-                    <div className="flex items-center h-fit">
-                      <div
-                        className="w-24 h-16 bg-cover bg-center rounded-sm"
-                        style={{
-                          backgroundImage: `url(${product?.image})`,
-                        }}
-                      ></div>
-                      <div className="ml-3">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          {product?.name}
-                        </p>
-                        <p className="text-gray-400 text-xs">
-                          {product.description}
-                        </p>
-                      </div>
-                    </div>
-                  </Column>
-                  <Column>
-                    <Typography.Paragraph>{product.price}</Typography.Paragraph>
-                  </Column>
-                  <Column>
-                    <Tag>{product?.category?.name}</Tag>
-                  </Column>
-                  <Column className="text-left">
-                    <Controls.Group>
-                      <Controls.View onClick={() => {}} />
-                      <Controls.Edit onClick={() => {}} />
-                      <Controls.Remove onClick={() => {}} />
-                    </Controls.Group>
-                  </Column>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
-            <span className="text-xs xs:text-sm text-gray-700">
-              Showing {pagination.currentPage} to {pagination.lastPage} of
-              {pagination.total} Entries
-            </span>
-            <div className="inline-flex mt-2 xs:mt-0">
-              <button
-                disabled={!pagination.hasPreviousPage}
-                className="text-sm bg-gray-300 hover:bg-teal-600 hover:text-white text-gray-800 font-semibold py-2 px-4 rounded-l flex items-center"
-              >
-                <Icon.Previous />
-                Prev
-              </button>
-              <button
-                disabled={!pagination.hasNextPage}
-                className="text-sm bg-gray-300 hover:bg-teal-600 hover:text-white text-gray-800 font-semibold py-2 px-4 rounded-r flex items-center"
-              >
-                Next
-                <Icon.Next />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Either>
-  );
-};
