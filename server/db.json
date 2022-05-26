@@ -41,6 +41,13 @@
       "description": "",
       "price": 7.5,
       "category": "Refrigerantes"
+    },
+    {
+      "name": "Teste",
+      "description": "tesre",
+      "price": "12.30",
+      "category": "Casa",
+      "id": 7
     }
   ]
 }
