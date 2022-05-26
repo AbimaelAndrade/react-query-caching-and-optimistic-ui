@@ -1,15 +1,16 @@
+import { Link } from "react-router-dom";
 import { LogoReactQuery } from "../images/LogoReactQuery";
 
 export const Navbar = () => {
   return (
     <div className="navbar bg-base-100 drop-shadow-lg">
       <div className="navbar-start">
-        <h1 className="btn btn-ghost normal-case text-xl">
+        <Link to="/" className="btn btn-ghost normal-case text-xl">
           <span className="hidden md:inline-flex">
             Caching e UI otimista com{" "}
           </span>
           React Query
-        </h1>
+        </Link>
       </div>
 
       <div className="navbar-center hidden lg:flex"></div>

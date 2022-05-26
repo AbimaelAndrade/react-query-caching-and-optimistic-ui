@@ -1,4 +1,5 @@
 import { HTMLAttributes } from "react";
+import { useHistory } from "react-router-dom";
 import { Loading } from "../images";
 import { Controls } from "./Controls";
 import { Either } from "./Either";
@@ -11,6 +12,12 @@ type TableProps = {
 };
 
 export const Table = ({ data, isLoading }: TableProps) => {
+  let history = useHistory();
+
+  const onClickViewProduct = (id: number) => {
+    history.push(`/products/${id}`);
+  };
+
   return (
     <Either renderIf={!isLoading} orRender={<LoadingProducts />}>
       <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -53,7 +60,11 @@ export const Table = ({ data, isLoading }: TableProps) => {
                   </Column>
                   <Column className="text-left">
                     <Controls.Group>
-                      <Controls.View onClick={() => {}} />
+                      <Controls.View
+                        onClick={() =>
+                          product?.id && onClickViewProduct(product?.id)
+                        }
+                      />
                       <Controls.Edit onClick={() => {}} />
                       <Controls.Remove onClick={() => {}} />
                     </Controls.Group>

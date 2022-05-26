@@ -1,10 +1,11 @@
 import { HTMLAttributes } from "react";
 import { Icon } from "../images";
 
-const View = ({ onClick }: HTMLAttributes<HTMLButtonElement>) => (
+const View = ({ onClick, ...rest }: HTMLAttributes<HTMLButtonElement>) => (
   <button
     onClick={onClick}
     className="w-5 mx-2 transform hover:text-teal-500 hover:scale-110"
+    {...rest}
   >
     <Icon.View className="w-6" />
   </button>

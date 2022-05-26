@@ -20,10 +20,7 @@ export function ProductsPage() {
   const queryClient = useQueryClient();
   const productKey = "products";
 
-  const { data: products, isLoading } = useQuery(productKey, fetchProducts, {
-    refetchOnWindowFocus: true,
-    retry: 2,
-  });
+  const { data: products, isLoading } = useQuery(productKey, fetchProducts);
 
   const { mutate, isLoading: isSaving } = useMutation(saveProduct, {
     onMutate: async (updatedProduct) => {
