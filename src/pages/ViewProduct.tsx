@@ -13,7 +13,9 @@ const fetchProduct = async (id: string) => {
 export const ViewProduct = () => {
   const { id } = useParams<{ id: string }>();
 
-  const { data: product } = useQuery(["products", id], () => fetchProduct(id));
+  const { data: product, isLoading } = useQuery(["products", id], () =>
+    fetchProduct(id)
+  );
 
   const price = useMemo(
     () =>
@@ -23,6 +25,16 @@ export const ViewProduct = () => {
       }).format(product?.price ?? 0),
     [product]
   );
+
+  if (isLoading || !product) {
+    return (
+      <Page>
+        <div className="w-full max-w-6xl rounded bg-white shadow-xl p-4 lg:p-8 mx-auto text-gray-800 relative md:text-left">
+          <p className="font-bold"> Carregando produto ...</p>
+        </div>
+      </Page>
+    );
+  }
 
   return (
     <Page>
