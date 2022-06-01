@@ -1,71 +1,44 @@
-import { FormEvent } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { FormEvent, useEffect, useState } from "react";
 import api from "../api";
 import { Either, Page, FormProduct, Table } from "../components";
 import { Loading } from "../images";
 
-const fetchProducts = async () => {
-  const { data } = await api.get<Product[]>(`/products`);
-
-  return data;
-};
-
-const saveProduct = async (product: Product) => {
-  const { data } = await api.post<Product>(`/products`, product);
-
-  return data;
-};
-
 export function ProductsPage() {
-  const queryClient = useQueryClient();
-  const productKey = "products";
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { data: products, isLoading } = useQuery(productKey, fetchProducts);
+  const fetchProducts = async () => {
+    setIsLoading(true);
+    const { data } = await api.get<Product[]>(`/products`);
 
-  const { mutate, isLoading: isSaving } = useMutation(saveProduct, {
-    onMutate: async (updatedProduct) => {
-      // cancel the current queries
-      await queryClient.cancelQueries(productKey);
+    setProducts(data);
+    setIsLoading(false);
+  };
 
-      // get current (previous) state
-      const previousState = queryClient.getQueryData(productKey);
-
-      // update the current cache
-      queryClient.setQueryData<Product[]>(productKey, (oldState) => {
-        return [...(oldState ?? []), updatedProduct];
-      });
-
-      return { previousState };
-    },
-    onError: async (err, variables, context) => {
-      const { previousState } = context as { previousState: Product[] };
-
-      queryClient.setQueryData(productKey, previousState);
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries(productKey);
-    },
-  });
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const onSaveProduct = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    try {
+      event.preventDefault();
+      setIsSaving(true);
+      const formData = new FormData(event.currentTarget);
 
-    const name = formData.get("name");
-    const description = formData.get("description");
-    const price = formData.get("price");
-    const category = formData.get("category");
+      const name = formData.get("name");
+      const description = formData.get("description");
+      const price = formData.get("price");
+      const category = formData.get("category");
 
-    const isValid = name && description && price && category;
+      const isValid = name && description && price && category;
 
-    if (isValid) {
-      const newProduct = {
-        name,
-        description,
-        price: +price,
-        category,
-      } as Product;
-      mutate(newProduct);
+      if (isValid) {
+        await api.post("/products", { name, description, price, category });
+      }
+    } catch (error) {
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -88,7 +61,7 @@ export function ProductsPage() {
           </div>
           <FormProduct onSubmit={onSaveProduct} />
         </div>
-        <Table data={products ?? []} isLoading={isLoading} />
+        <Table data={products} isLoading={isLoading} />
       </div>
     </Page>
   );

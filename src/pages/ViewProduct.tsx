@@ -1,21 +1,24 @@
-import { useMemo } from "react";
-import { useQuery } from "react-query";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api";
 import { Page } from "../components";
 
-const fetchProduct = async (id: string) => {
-  const { data } = await api.get(`/products/${id}`);
-
-  return data;
-};
-
 export const ViewProduct = () => {
+  const [product, setProduct] = useState<Product>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { id } = useParams<{ id: string }>();
 
-  const { data: product, isLoading } = useQuery(["products", id], () =>
-    fetchProduct(id)
-  );
+  const fetchProduct = async (id: string) => {
+    setIsLoading(true);
+    const { data } = await api.get<Product>(`/products/${id}`);
+    setProduct(data);
+
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchProduct(id);
+  }, []);
 
   const price = useMemo(
     () =>
